@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ты свободна сегодня?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 {
+            color: #d32f2f;
+            font-size: 3em;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            color: #555;
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .button {
+            background-color: #d32f2f;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin: 10px;
+            position: absolute;
+        }
+        .button:hover {
+            background-color: #b71c1c;
+        }
+        .hidden {
+            display: none;
+        }
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 0 auto;
+            animation: slideIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Первая страница -->
+    <div id="firstPage">
+        <h1>Привет! 😊</h1>
+        <p>Ты свободна сегодня?</p>
+        <button class="button" onclick="showInvitationPage()">Да</button>
+        <button id="runawayButton" class="button">Не сегодня</button>
+    </div>
+
+    <!-- Вторая страница (скрыта сначала) -->
+    <div id="invitationPage" class="hidden">
+        <div class="card">
+            <h1>Прекрасно, приглашаю вас на ужин! 💖</h1>
+            <p>Жду вас сегодня в <strong>ресторане Stumari</strong>.</p>
+            <p>Или, если хотите, могу заехать за вами.😊</p>
+            <p>До встречи!</p>
+        </div>
+    </div>
+
+    <script>
+        // Функция для перехода на страницу с приглашением
+        function showInvitationPage() {
+            document.getElementById('firstPage').classList.add('hidden');
+            document.getElementById('invitationPage').classList.remove('hidden');
+        }
+
+        // Функция для показа грустного сообщения
+        function showSadMessage() {
+            document.getElementById('firstPage').classList.add('hidden');
+            document.getElementById('sadMessage').classList.remove('hidden');
+        }
+
+        // Функция для "убегающей" кнопки
+        const runawayButton = document.getElementById('runawayButton');
+
+        runawayButton.addEventListener('mouseover', () => {
+            moveButton();
+        });
+
+        runawayButton.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Предотвращаем стандартное поведение на телефоне
+            moveButton();
+        });
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - 100); // Случайная позиция по X
+            const y = Math.random() * (window.innerHeight - 50); // Случайная позиция по Y
+            runawayButton.style.left = `${x}px`;
+            runawayButton.style.top = `${y}px`;
+        }
+    </script>
+</body>
+</html>
